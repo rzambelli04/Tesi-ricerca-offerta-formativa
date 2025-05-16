@@ -1,0 +1,66 @@
+/* Sfondo sfumato */
+body {
+    background: linear-gradient(135deg, #d9f3ff, #e8f0ff);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Card centrale */
+.form-card {
+    background: white;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #d3e0ea;
+}
+
+/* Titolo principale */
+h2 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Pulsante principale */
+.btn-main {
+    background-color: #4da8da;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    color: white;
+    transition: background-color 0.3s;
+    border-radius: 6px;
+}
+
+.btn-main:hover {
+    background-color: #399ed6;
+}
+
+/* Lista risultati */
+.list-group-item {
+    background-color: #f2faff;
+    border-color: #cfe6f3;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-card {
+        margin: 20px;
+    }
+
+#risultati-container {
+    margin-top: 30px;
+}
+
+.result-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+}

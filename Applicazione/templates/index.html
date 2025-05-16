@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Ricerca Formazione</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="form-card shadow p-4 rounded">
+            <h2 class="text-center mb-4">Ricerca Opportunità Formative</h2>
+            <form method="POST" action="/esegui">
+                <div class="mb-3">
+                    <label for="corso" class="form-label">Corso di studi</label>
+                    <input type="text" class="form-control" name="corso" required>
+                </div>
+                <div class="mb-3">
+                    <label for="citta" class="form-label">Città</label>
+                    <input type="text" class="form-control" name="citta" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lingua" class="form-label">Lingua</label>
+                    <select class="form-select" name="lingua">
+                        <option value="it">Italiano</option>
+                        <option value="es">Spagnolo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="metodo" class="form-label">Metodo di scraping</label>
+                    <select class="form-select" name="metodo">
+                        <option value="custom">Custom</option>
+                        <option value="direct">Direct</option>
+                        <option value="serpapi">SerpAPI</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="numero" class="form-label">Numero risultati</label>
+                    <select class="form-select" name="numero">
+                        {% for i in range(1, 11) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-main">Avvia Ricerca</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if risultati %}
+    <div id="risultati-container" class="container mt-3 w-75">
+        <h4 class="text-center mb-4">Risultati</h4>
+        <ul class="list-group">
+            {% for r in risultati %}
+            <li class="list-group-item result-box">
+                <strong>{{ r.titolo }}</strong><br>
+                <a href="{{ r.link }}" target="_blank">{{ r.link }}</a><br>
+                {% if "Contenuto non disponibile" in r.descrizione %}
+                <p class="text-muted fst-italic">{{ r.descrizione }}</p>
+                {% else %}
+                <p>{{ r.descrizione }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+
