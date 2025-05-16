@@ -58,21 +58,23 @@ Requisiti:
 
 PROMPT_ANALISI_IT = """Analizza il contenuto HTML (in formato .txt) di una pagina universitaria.
 
-Cerca di individuare una **descrizione generale** del corso di laurea, ovvero qualunque testo che spieghi:
+Il tuo compito è ricavare una **descrizione generale** del corso di laurea, ovvero qualunque testo che spieghi:
 
 - Che cos’è il corso
 - A chi è rivolto
 - Quali competenze fornisce
 - Quali sbocchi offre (lavorativi o accademici)
 
-Non soffermarti su dettagli tecnici come piani di studio, elenchi di esami, crediti, orari o tabelle. Ignora anche intestazioni, footer, login e contenuti duplicati o decorativi.
+Ignora dettagli tecnici come piani di studio, elenchi di esami, crediti, orari o tabelle. Evita anche intestazioni, menu, footer o testi duplicati.
 
-Se il contenuto rilevante è parziale o disordinato, prova comunque a **ricostruire un paragrafo fluido e coerente**, come se lo stessi scrivendo per una guida all’orientamento universitario.
+Se il contenuto rilevante è frammentato o disorganizzato, prova comunque a **ricostruire un paragrafo breve ma coerente**. Se trovi solo parti sparse, **uniscile tu** per ottenere almeno un paragrafo sensato.
 
- **Scrivi nella lingua del testo originale.**  
- Lunghezza: tra 5 e 15 righe.  
- Se non trovi nulla di utile, scrivi esattamente:
+Se proprio non riesci a trovare nessun contenuto utile (nemmeno singole frasi), scrivi esattamente:
 **"Contenuto non disponibile nella pagina analizzata."**
+
+**Scrivi nella lingua del testo originale.**  
+Lunghezza ideale: da 4 a 10 righe.
+"**
 
 """
 
@@ -272,8 +274,7 @@ def esegui_pipeline():
 
     print("\nPipeline completata. Risultati totali:", len(descrizioni))
     salva_su_db(corso, citta, descrizioni)
-    risultati_validi = [r for r in descrizioni if "Contenuto non disponibile" not in r["descrizione"]]
-    return render_template("index.html", risultati=risultati_validi)
+    return render_template("index.html", risultati=descrizioni)
 
 
 if __name__ == "__main__":
